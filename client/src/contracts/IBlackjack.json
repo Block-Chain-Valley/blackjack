@@ -1,0 +1,1904 @@
+{
+  "contractName": "IBlackjack",
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "gameId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint64",
+          "name": "round",
+          "type": "uint64"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint8",
+          "name": "cardValue",
+          "type": "uint8"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint8",
+          "name": "score",
+          "type": "uint8"
+        }
+      ],
+      "name": "CardDrawn",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "gameId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint64",
+          "name": "round",
+          "type": "uint64"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "player",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "bet",
+          "type": "uint256"
+        }
+      ],
+      "name": "NewRound",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "gameId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256[]",
+          "name": "playerHand",
+          "type": "uint256[]"
+        }
+      ],
+      "name": "PlayerHand",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "Received",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "gameId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint64",
+          "name": "round",
+          "type": "uint64"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "payout",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint8",
+          "name": "playerScore",
+          "type": "uint8"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint8",
+          "name": "dealerScore",
+          "type": "uint8"
+        }
+      ],
+      "name": "Result",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "gameId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint64",
+          "name": "round",
+          "type": "uint64"
+        },
+        {
+          "indexed": false,
+          "internalType": "enum IBlackjack.Stage",
+          "name": "newStage",
+          "type": "uint8"
+        }
+      ],
+      "name": "StageChanged",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "kill",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "newRound",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "hit",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "stand",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getDealerState",
+      "outputs": [
+        {
+          "internalType": "uint256[]",
+          "name": "hand",
+          "type": "uint256[]"
+        },
+        {
+          "internalType": "uint256",
+          "name": "score",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getPlayerState",
+      "outputs": [
+        {
+          "internalType": "uint256[]",
+          "name": "hand",
+          "type": "uint256[]"
+        },
+        {
+          "internalType": "uint256",
+          "name": "score",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "bet",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getGameState",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "gameId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint64",
+          "name": "startTime",
+          "type": "uint64"
+        },
+        {
+          "internalType": "uint256",
+          "name": "gameMaxBet",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint64",
+          "name": "round",
+          "type": "uint64"
+        },
+        {
+          "internalType": "enum IBlackjack.Stage",
+          "name": "stage",
+          "type": "uint8"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.8.15+commit.e14f2714\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"gameId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint64\",\"name\":\"round\",\"type\":\"uint64\"},{\"indexed\":false,\"internalType\":\"uint8\",\"name\":\"cardValue\",\"type\":\"uint8\"},{\"indexed\":false,\"internalType\":\"uint8\",\"name\":\"score\",\"type\":\"uint8\"}],\"name\":\"CardDrawn\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"gameId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint64\",\"name\":\"round\",\"type\":\"uint64\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"player\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"bet\",\"type\":\"uint256\"}],\"name\":\"NewRound\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"gameId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256[]\",\"name\":\"playerHand\",\"type\":\"uint256[]\"}],\"name\":\"PlayerHand\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"Received\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"gameId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint64\",\"name\":\"round\",\"type\":\"uint64\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"payout\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint8\",\"name\":\"playerScore\",\"type\":\"uint8\"},{\"indexed\":false,\"internalType\":\"uint8\",\"name\":\"dealerScore\",\"type\":\"uint8\"}],\"name\":\"Result\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"gameId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint64\",\"name\":\"round\",\"type\":\"uint64\"},{\"indexed\":false,\"internalType\":\"enum IBlackjack.Stage\",\"name\":\"newStage\",\"type\":\"uint8\"}],\"name\":\"StageChanged\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"getDealerState\",\"outputs\":[{\"internalType\":\"uint256[]\",\"name\":\"hand\",\"type\":\"uint256[]\"},{\"internalType\":\"uint256\",\"name\":\"score\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getGameState\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"gameId\",\"type\":\"uint256\"},{\"internalType\":\"uint64\",\"name\":\"startTime\",\"type\":\"uint64\"},{\"internalType\":\"uint256\",\"name\":\"gameMaxBet\",\"type\":\"uint256\"},{\"internalType\":\"uint64\",\"name\":\"round\",\"type\":\"uint64\"},{\"internalType\":\"enum IBlackjack.Stage\",\"name\":\"stage\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getPlayerState\",\"outputs\":[{\"internalType\":\"uint256[]\",\"name\":\"hand\",\"type\":\"uint256[]\"},{\"internalType\":\"uint256\",\"name\":\"score\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"bet\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"hit\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"kill\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"newRound\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"stand\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{\"getDealerState()\":{\"details\":\"Get dealer state\",\"returns\":{\"hand\":\"The dealer's hand\",\"score\":\"The dealer's score\"}},\"getGameState()\":{\"details\":\"Get game stage\",\"returns\":{\"gameId\":\"ID for the current Blackjack game\",\"gameMaxBet\":\"Max bet allowed to be placed for new game\",\"round\":\"Number of round of Blackjack game played\",\"stage\":\"Stage of the Blackjack game\",\"startTime\":\"Time the current Blackjack game began\"}},\"getPlayerState()\":{\"details\":\"Get player state\",\"returns\":{\"bet\":\"Original bet at start of hand\",\"hand\":\"The player's hand\",\"score\":\"The player's score\"}},\"hit()\":{\"details\":\"Take one additional card\"},\"newRound()\":{\"details\":\"Start a new round of Blackjack\"},\"stand()\":{\"details\":\"Taking no more cards and ended the game\"}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"getDealerState()\":{\"notice\":\"Getters\"}},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/IBlackjack.sol\":\"IBlackjack\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/IBlackjack.sol\":{\"keccak256\":\"0x171f0466249d99294a4953158020b6b8334d3da73bd675ca5eb83bdbc2fd770a\",\"urls\":[\"bzz-raw://0886729a88bdff654b410972816807db578bbd41d6d46fef7dd9c7b8286fd51f\",\"dweb:/ipfs/QmW5GUSPwKxS9WcACWubD68Jx8NYFcYycREKijNypbtfKn\"]}},\"version\":1}",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "immutableReferences": {},
+  "generatedSources": [],
+  "deployedGeneratedSources": [],
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "pragma solidity ^0.8.15;\n\ninterface IBlackjack {\n\n  enum Stage {\n    Bet,\n    PlayHand,\n    ConcludeHands\n  }\n\n  struct Game {\n    uint id;\n    uint64 startTime;\n    uint64 round;\n    Stage stage;\n    Player dealer;\n    Player player;\n  }\n\n  struct Player {\n    uint bet;\n    uint8 score;\n    uint[] hand;\n  }\n\n  event StageChanged(uint gameId, uint64 round, Stage newStage);\n  event NewRound(uint gameId, uint64 round, address player, uint bet);\n  event CardDrawn(uint gameId, uint64 round, uint8 cardValue, uint8 score);\n  event Result(uint gameId, uint64 round, uint payout, uint8 playerScore, uint8 dealerScore);\n  event PlayerHand(uint gameId, uint[] playerHand);\n  event Received(address, uint);\n\n  function kill() external;\n\n  /// @dev Start a new round of Blackjack\n  function newRound() external payable;\n\n  /// @dev Take one additional card\n  function hit() external;\n\n  /// @dev Taking no more cards and ended the game\n  function stand() external;\n\n  /// Getters\n  /// @dev Get dealer state\n  /// @return hand The dealer's hand\n  /// @return score The dealer's score\n  function getDealerState() external view returns (uint[] memory hand, uint score);\n\n  /// @dev Get player state\n  /// @return hand The player's hand\n  /// @return score The player's score\n  /// @return bet Original bet at start of hand\n  function getPlayerState() external view returns (uint[] memory hand, uint score, uint bet);\n\n  /// @dev Get game stage\n  /// @return gameId ID for the current Blackjack game\n  /// @return startTime Time the current Blackjack game began\n  /// @return gameMaxBet Max bet allowed to be placed for new game\n  /// @return round Number of round of Blackjack game played\n  /// @return stage Stage of the Blackjack game\n  function getGameState() external view returns (uint gameId, uint64 startTime, uint gameMaxBet, uint64 round, Stage stage);\n}",
+  "sourcePath": "/Users/cwrong/Desktop/BlockchainValley/2022_2_Sessions/blackjack/project/truffle/contracts/IBlackjack.sol",
+  "ast": {
+    "absolutePath": "project:/contracts/IBlackjack.sol",
+    "exportedSymbols": {
+      "IBlackjack": [
+        1429
+      ]
+    },
+    "id": 1430,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1296,
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".15"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:4"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "IBlackjack",
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "fullyImplemented": false,
+        "id": 1429,
+        "linearizedBaseContracts": [
+          1429
+        ],
+        "name": "IBlackjack",
+        "nameLocation": "36:10:4",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "canonicalName": "IBlackjack.Stage",
+            "id": 1300,
+            "members": [
+              {
+                "id": 1297,
+                "name": "Bet",
+                "nameLocation": "69:3:4",
+                "nodeType": "EnumValue",
+                "src": "69:3:4"
+              },
+              {
+                "id": 1298,
+                "name": "PlayHand",
+                "nameLocation": "78:8:4",
+                "nodeType": "EnumValue",
+                "src": "78:8:4"
+              },
+              {
+                "id": 1299,
+                "name": "ConcludeHands",
+                "nameLocation": "92:13:4",
+                "nodeType": "EnumValue",
+                "src": "92:13:4"
+              }
+            ],
+            "name": "Stage",
+            "nameLocation": "57:5:4",
+            "nodeType": "EnumDefinition",
+            "src": "52:57:4"
+          },
+          {
+            "canonicalName": "IBlackjack.Game",
+            "id": 1316,
+            "members": [
+              {
+                "constant": false,
+                "id": 1302,
+                "mutability": "mutable",
+                "name": "id",
+                "nameLocation": "136:2:4",
+                "nodeType": "VariableDeclaration",
+                "scope": 1316,
+                "src": "131:7:4",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 1301,
+                  "name": "uint",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "131:4:4",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1304,
+                "mutability": "mutable",
+                "name": "startTime",
+                "nameLocation": "151:9:4",
+                "nodeType": "VariableDeclaration",
+                "scope": 1316,
+                "src": "144:16:4",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint64",
+                  "typeString": "uint64"
+                },
+                "typeName": {
+                  "id": 1303,
+                  "name": "uint64",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "144:6:4",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint64",
+                    "typeString": "uint64"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1306,
+                "mutability": "mutable",
+                "name": "round",
+                "nameLocation": "173:5:4",
+                "nodeType": "VariableDeclaration",
+                "scope": 1316,
+                "src": "166:12:4",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint64",
+                  "typeString": "uint64"
+                },
+                "typeName": {
+                  "id": 1305,
+                  "name": "uint64",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "166:6:4",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint64",
+                    "typeString": "uint64"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1309,
+                "mutability": "mutable",
+                "name": "stage",
+                "nameLocation": "190:5:4",
+                "nodeType": "VariableDeclaration",
+                "scope": 1316,
+                "src": "184:11:4",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_enum$_Stage_$1300",
+                  "typeString": "enum IBlackjack.Stage"
+                },
+                "typeName": {
+                  "id": 1308,
+                  "nodeType": "UserDefinedTypeName",
+                  "pathNode": {
+                    "id": 1307,
+                    "name": "Stage",
+                    "nodeType": "IdentifierPath",
+                    "referencedDeclaration": 1300,
+                    "src": "184:5:4"
+                  },
+                  "referencedDeclaration": 1300,
+                  "src": "184:5:4",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_enum$_Stage_$1300",
+                    "typeString": "enum IBlackjack.Stage"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1312,
+                "mutability": "mutable",
+                "name": "dealer",
+                "nameLocation": "208:6:4",
+                "nodeType": "VariableDeclaration",
+                "scope": 1316,
+                "src": "201:13:4",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_Player_$1324_storage_ptr",
+                  "typeString": "struct IBlackjack.Player"
+                },
+                "typeName": {
+                  "id": 1311,
+                  "nodeType": "UserDefinedTypeName",
+                  "pathNode": {
+                    "id": 1310,
+                    "name": "Player",
+                    "nodeType": "IdentifierPath",
+                    "referencedDeclaration": 1324,
+                    "src": "201:6:4"
+                  },
+                  "referencedDeclaration": 1324,
+                  "src": "201:6:4",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Player_$1324_storage_ptr",
+                    "typeString": "struct IBlackjack.Player"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1315,
+                "mutability": "mutable",
+                "name": "player",
+                "nameLocation": "227:6:4",
+                "nodeType": "VariableDeclaration",
+                "scope": 1316,
+                "src": "220:13:4",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_Player_$1324_storage_ptr",
+                  "typeString": "struct IBlackjack.Player"
+                },
+                "typeName": {
+                  "id": 1314,
+                  "nodeType": "UserDefinedTypeName",
+                  "pathNode": {
+                    "id": 1313,
+                    "name": "Player",
+                    "nodeType": "IdentifierPath",
+                    "referencedDeclaration": 1324,
+                    "src": "220:6:4"
+                  },
+                  "referencedDeclaration": 1324,
+                  "src": "220:6:4",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Player_$1324_storage_ptr",
+                    "typeString": "struct IBlackjack.Player"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "name": "Game",
+            "nameLocation": "120:4:4",
+            "nodeType": "StructDefinition",
+            "scope": 1429,
+            "src": "113:125:4",
+            "visibility": "public"
+          },
+          {
+            "canonicalName": "IBlackjack.Player",
+            "id": 1324,
+            "members": [
+              {
+                "constant": false,
+                "id": 1318,
+                "mutability": "mutable",
+                "name": "bet",
+                "nameLocation": "267:3:4",
+                "nodeType": "VariableDeclaration",
+                "scope": 1324,
+                "src": "262:8:4",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 1317,
+                  "name": "uint",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "262:4:4",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1320,
+                "mutability": "mutable",
+                "name": "score",
+                "nameLocation": "282:5:4",
+                "nodeType": "VariableDeclaration",
+                "scope": 1324,
+                "src": "276:11:4",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint8",
+                  "typeString": "uint8"
+                },
+                "typeName": {
+                  "id": 1319,
+                  "name": "uint8",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "276:5:4",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint8",
+                    "typeString": "uint8"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1323,
+                "mutability": "mutable",
+                "name": "hand",
+                "nameLocation": "300:4:4",
+                "nodeType": "VariableDeclaration",
+                "scope": 1324,
+                "src": "293:11:4",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_array$_t_uint256_$dyn_storage_ptr",
+                  "typeString": "uint256[]"
+                },
+                "typeName": {
+                  "baseType": {
+                    "id": 1321,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "293:4:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "id": 1322,
+                  "nodeType": "ArrayTypeName",
+                  "src": "293:6:4",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_uint256_$dyn_storage_ptr",
+                    "typeString": "uint256[]"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "name": "Player",
+            "nameLocation": "249:6:4",
+            "nodeType": "StructDefinition",
+            "scope": 1429,
+            "src": "242:67:4",
+            "visibility": "public"
+          },
+          {
+            "anonymous": false,
+            "eventSelector": "bf34949e790239ec64f4107f427fa499173e6574405ea4955901f4a81f05bbbd",
+            "id": 1333,
+            "name": "StageChanged",
+            "nameLocation": "319:12:4",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 1332,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1326,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "gameId",
+                  "nameLocation": "337:6:4",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1333,
+                  "src": "332:11:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1325,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "332:4:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1328,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "round",
+                  "nameLocation": "352:5:4",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1333,
+                  "src": "345:12:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint64",
+                    "typeString": "uint64"
+                  },
+                  "typeName": {
+                    "id": 1327,
+                    "name": "uint64",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "345:6:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint64",
+                      "typeString": "uint64"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1331,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "newStage",
+                  "nameLocation": "365:8:4",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1333,
+                  "src": "359:14:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_enum$_Stage_$1300",
+                    "typeString": "enum IBlackjack.Stage"
+                  },
+                  "typeName": {
+                    "id": 1330,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 1329,
+                      "name": "Stage",
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 1300,
+                      "src": "359:5:4"
+                    },
+                    "referencedDeclaration": 1300,
+                    "src": "359:5:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_enum$_Stage_$1300",
+                      "typeString": "enum IBlackjack.Stage"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "331:43:4"
+            },
+            "src": "313:62:4"
+          },
+          {
+            "anonymous": false,
+            "eventSelector": "3d4e45c47472036df382bcd86971010e0654905f09ea384e13d66343a969a7ab",
+            "id": 1343,
+            "name": "NewRound",
+            "nameLocation": "384:8:4",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 1342,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1335,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "gameId",
+                  "nameLocation": "398:6:4",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1343,
+                  "src": "393:11:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1334,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "393:4:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1337,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "round",
+                  "nameLocation": "413:5:4",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1343,
+                  "src": "406:12:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint64",
+                    "typeString": "uint64"
+                  },
+                  "typeName": {
+                    "id": 1336,
+                    "name": "uint64",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "406:6:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint64",
+                      "typeString": "uint64"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1339,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "player",
+                  "nameLocation": "428:6:4",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1343,
+                  "src": "420:14:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1338,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "420:7:4",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1341,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "bet",
+                  "nameLocation": "441:3:4",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1343,
+                  "src": "436:8:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1340,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "436:4:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "392:53:4"
+            },
+            "src": "378:68:4"
+          },
+          {
+            "anonymous": false,
+            "eventSelector": "bf6ada8879281cec14c5f104be3c1b3acdccf97645f07c2b0a23eed63901762e",
+            "id": 1353,
+            "name": "CardDrawn",
+            "nameLocation": "455:9:4",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 1352,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1345,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "gameId",
+                  "nameLocation": "470:6:4",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1353,
+                  "src": "465:11:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1344,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "465:4:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1347,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "round",
+                  "nameLocation": "485:5:4",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1353,
+                  "src": "478:12:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint64",
+                    "typeString": "uint64"
+                  },
+                  "typeName": {
+                    "id": 1346,
+                    "name": "uint64",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "478:6:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint64",
+                      "typeString": "uint64"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1349,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "cardValue",
+                  "nameLocation": "498:9:4",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1353,
+                  "src": "492:15:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint8",
+                    "typeString": "uint8"
+                  },
+                  "typeName": {
+                    "id": 1348,
+                    "name": "uint8",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "492:5:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint8",
+                      "typeString": "uint8"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1351,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "score",
+                  "nameLocation": "515:5:4",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1353,
+                  "src": "509:11:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint8",
+                    "typeString": "uint8"
+                  },
+                  "typeName": {
+                    "id": 1350,
+                    "name": "uint8",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "509:5:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint8",
+                      "typeString": "uint8"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "464:57:4"
+            },
+            "src": "449:73:4"
+          },
+          {
+            "anonymous": false,
+            "eventSelector": "1b95d75fb3f54f1f6c0a87f3b89ba37635d37eb4ba5d37d0a38240f74830fb05",
+            "id": 1365,
+            "name": "Result",
+            "nameLocation": "531:6:4",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 1364,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1355,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "gameId",
+                  "nameLocation": "543:6:4",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1365,
+                  "src": "538:11:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1354,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "538:4:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1357,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "round",
+                  "nameLocation": "558:5:4",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1365,
+                  "src": "551:12:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint64",
+                    "typeString": "uint64"
+                  },
+                  "typeName": {
+                    "id": 1356,
+                    "name": "uint64",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "551:6:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint64",
+                      "typeString": "uint64"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1359,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "payout",
+                  "nameLocation": "570:6:4",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1365,
+                  "src": "565:11:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1358,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "565:4:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1361,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "playerScore",
+                  "nameLocation": "584:11:4",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1365,
+                  "src": "578:17:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint8",
+                    "typeString": "uint8"
+                  },
+                  "typeName": {
+                    "id": 1360,
+                    "name": "uint8",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "578:5:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint8",
+                      "typeString": "uint8"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1363,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "dealerScore",
+                  "nameLocation": "603:11:4",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1365,
+                  "src": "597:17:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint8",
+                    "typeString": "uint8"
+                  },
+                  "typeName": {
+                    "id": 1362,
+                    "name": "uint8",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "597:5:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint8",
+                      "typeString": "uint8"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "537:78:4"
+            },
+            "src": "525:91:4"
+          },
+          {
+            "anonymous": false,
+            "eventSelector": "115f04a14d2ae5419d659fa3beeaf66f4a987bae221f46542f81b59031deadb9",
+            "id": 1372,
+            "name": "PlayerHand",
+            "nameLocation": "625:10:4",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 1371,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1367,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "gameId",
+                  "nameLocation": "641:6:4",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1372,
+                  "src": "636:11:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1366,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "636:4:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1370,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "playerHand",
+                  "nameLocation": "656:10:4",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1372,
+                  "src": "649:17:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_uint256_$dyn_memory_ptr",
+                    "typeString": "uint256[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 1368,
+                      "name": "uint",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "649:4:4",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "id": 1369,
+                    "nodeType": "ArrayTypeName",
+                    "src": "649:6:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_uint256_$dyn_storage_ptr",
+                      "typeString": "uint256[]"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "635:32:4"
+            },
+            "src": "619:49:4"
+          },
+          {
+            "anonymous": false,
+            "eventSelector": "88a5966d370b9919b20f3e2c13ff65706f196a4e32cc2c12bf57088f88525874",
+            "id": 1378,
+            "name": "Received",
+            "nameLocation": "677:8:4",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 1377,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1374,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1378,
+                  "src": "686:7:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 1373,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "686:7:4",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1376,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1378,
+                  "src": "695:4:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1375,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "695:4:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "685:15:4"
+            },
+            "src": "671:30:4"
+          },
+          {
+            "functionSelector": "41c0e1b5",
+            "id": 1381,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "kill",
+            "nameLocation": "714:4:4",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1379,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "718:2:4"
+            },
+            "returnParameters": {
+              "id": 1380,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "729:0:4"
+            },
+            "scope": 1429,
+            "src": "705:25:4",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 1382,
+              "nodeType": "StructuredDocumentation",
+              "src": "734:39:4",
+              "text": "@dev Start a new round of Blackjack"
+            },
+            "functionSelector": "c5b1d9aa",
+            "id": 1385,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "newRound",
+            "nameLocation": "785:8:4",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1383,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "793:2:4"
+            },
+            "returnParameters": {
+              "id": 1384,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "812:0:4"
+            },
+            "scope": 1429,
+            "src": "776:37:4",
+            "stateMutability": "payable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 1386,
+              "nodeType": "StructuredDocumentation",
+              "src": "817:33:4",
+              "text": "@dev Take one additional card"
+            },
+            "functionSelector": "2ae3594a",
+            "id": 1389,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "hit",
+            "nameLocation": "862:3:4",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1387,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "865:2:4"
+            },
+            "returnParameters": {
+              "id": 1388,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "876:0:4"
+            },
+            "scope": 1429,
+            "src": "853:24:4",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 1390,
+              "nodeType": "StructuredDocumentation",
+              "src": "881:48:4",
+              "text": "@dev Taking no more cards and ended the game"
+            },
+            "functionSelector": "c2897b10",
+            "id": 1393,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "stand",
+            "nameLocation": "941:5:4",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1391,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "946:2:4"
+            },
+            "returnParameters": {
+              "id": 1392,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "957:0:4"
+            },
+            "scope": 1429,
+            "src": "932:26:4",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 1394,
+              "nodeType": "StructuredDocumentation",
+              "src": "962:115:4",
+              "text": "Getters\n @dev Get dealer state\n @return hand The dealer's hand\n @return score The dealer's score"
+            },
+            "functionSelector": "76957756",
+            "id": 1402,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getDealerState",
+            "nameLocation": "1089:14:4",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1395,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1103:2:4"
+            },
+            "returnParameters": {
+              "id": 1401,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1398,
+                  "mutability": "mutable",
+                  "name": "hand",
+                  "nameLocation": "1143:4:4",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1402,
+                  "src": "1129:18:4",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_uint256_$dyn_memory_ptr",
+                    "typeString": "uint256[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 1396,
+                      "name": "uint",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "1129:4:4",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "id": 1397,
+                    "nodeType": "ArrayTypeName",
+                    "src": "1129:6:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_uint256_$dyn_storage_ptr",
+                      "typeString": "uint256[]"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1400,
+                  "mutability": "mutable",
+                  "name": "score",
+                  "nameLocation": "1154:5:4",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1402,
+                  "src": "1149:10:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1399,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1149:4:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1128:32:4"
+            },
+            "scope": 1429,
+            "src": "1080:81:4",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 1403,
+              "nodeType": "StructuredDocumentation",
+              "src": "1165:149:4",
+              "text": "@dev Get player state\n @return hand The player's hand\n @return score The player's score\n @return bet Original bet at start of hand"
+            },
+            "functionSelector": "6c4941f5",
+            "id": 1413,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getPlayerState",
+            "nameLocation": "1326:14:4",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1404,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1340:2:4"
+            },
+            "returnParameters": {
+              "id": 1412,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1407,
+                  "mutability": "mutable",
+                  "name": "hand",
+                  "nameLocation": "1380:4:4",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1413,
+                  "src": "1366:18:4",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_uint256_$dyn_memory_ptr",
+                    "typeString": "uint256[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 1405,
+                      "name": "uint",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "1366:4:4",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "id": 1406,
+                    "nodeType": "ArrayTypeName",
+                    "src": "1366:6:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_uint256_$dyn_storage_ptr",
+                      "typeString": "uint256[]"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1409,
+                  "mutability": "mutable",
+                  "name": "score",
+                  "nameLocation": "1391:5:4",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1413,
+                  "src": "1386:10:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1408,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1386:4:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1411,
+                  "mutability": "mutable",
+                  "name": "bet",
+                  "nameLocation": "1403:3:4",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1413,
+                  "src": "1398:8:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1410,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1398:4:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1365:42:4"
+            },
+            "scope": 1429,
+            "src": "1317:91:4",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "documentation": {
+              "id": 1414,
+              "nodeType": "StructuredDocumentation",
+              "src": "1412:316:4",
+              "text": "@dev Get game stage\n @return gameId ID for the current Blackjack game\n @return startTime Time the current Blackjack game began\n @return gameMaxBet Max bet allowed to be placed for new game\n @return round Number of round of Blackjack game played\n @return stage Stage of the Blackjack game"
+            },
+            "functionSelector": "b7d0628b",
+            "id": 1428,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getGameState",
+            "nameLocation": "1740:12:4",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1415,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "1752:2:4"
+            },
+            "returnParameters": {
+              "id": 1427,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1417,
+                  "mutability": "mutable",
+                  "name": "gameId",
+                  "nameLocation": "1783:6:4",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1428,
+                  "src": "1778:11:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1416,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1778:4:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1419,
+                  "mutability": "mutable",
+                  "name": "startTime",
+                  "nameLocation": "1798:9:4",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1428,
+                  "src": "1791:16:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint64",
+                    "typeString": "uint64"
+                  },
+                  "typeName": {
+                    "id": 1418,
+                    "name": "uint64",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1791:6:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint64",
+                      "typeString": "uint64"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1421,
+                  "mutability": "mutable",
+                  "name": "gameMaxBet",
+                  "nameLocation": "1814:10:4",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1428,
+                  "src": "1809:15:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1420,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1809:4:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1423,
+                  "mutability": "mutable",
+                  "name": "round",
+                  "nameLocation": "1833:5:4",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1428,
+                  "src": "1826:12:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint64",
+                    "typeString": "uint64"
+                  },
+                  "typeName": {
+                    "id": 1422,
+                    "name": "uint64",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "1826:6:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint64",
+                      "typeString": "uint64"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1426,
+                  "mutability": "mutable",
+                  "name": "stage",
+                  "nameLocation": "1846:5:4",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1428,
+                  "src": "1840:11:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_enum$_Stage_$1300",
+                    "typeString": "enum IBlackjack.Stage"
+                  },
+                  "typeName": {
+                    "id": 1425,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 1424,
+                      "name": "Stage",
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 1300,
+                      "src": "1840:5:4"
+                    },
+                    "referencedDeclaration": 1300,
+                    "src": "1840:5:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_enum$_Stage_$1300",
+                      "typeString": "enum IBlackjack.Stage"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "1777:75:4"
+            },
+            "scope": 1429,
+            "src": "1731:122:4",
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "scope": 1430,
+        "src": "26:1829:4",
+        "usedErrors": []
+      }
+    ],
+    "src": "0:1855:4"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.8.15+commit.e14f2714.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.10",
+  "updatedAt": "2022-09-25T06:08:37.239Z",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {
+      "getDealerState()": {
+        "details": "Get dealer state",
+        "returns": {
+          "hand": "The dealer's hand",
+          "score": "The dealer's score"
+        }
+      },
+      "getGameState()": {
+        "details": "Get game stage",
+        "returns": {
+          "gameId": "ID for the current Blackjack game",
+          "gameMaxBet": "Max bet allowed to be placed for new game",
+          "round": "Number of round of Blackjack game played",
+          "stage": "Stage of the Blackjack game",
+          "startTime": "Time the current Blackjack game began"
+        }
+      },
+      "getPlayerState()": {
+        "details": "Get player state",
+        "returns": {
+          "bet": "Original bet at start of hand",
+          "hand": "The player's hand",
+          "score": "The player's score"
+        }
+      },
+      "hit()": {
+        "details": "Take one additional card"
+      },
+      "newRound()": {
+        "details": "Start a new round of Blackjack"
+      },
+      "stand()": {
+        "details": "Taking no more cards and ended the game"
+      }
+    },
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {
+      "getDealerState()": {
+        "notice": "Getters"
+      }
+    },
+    "version": 1
+  }
+}
